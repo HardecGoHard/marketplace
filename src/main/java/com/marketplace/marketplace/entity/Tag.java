@@ -1,14 +1,14 @@
 package com.marketplace.marketplace.entity;
 
+import com.marketplace.marketplace.entity.base.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Tag {
+public class Tag extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private static final long serialVersionUID = 604934841905852817L;
 
     private String name;
 
@@ -16,15 +16,6 @@ public class Tag {
     private Set<Item> items;
 
     public Tag() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Tag setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getName() {

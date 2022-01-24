@@ -1,16 +1,18 @@
 package com.marketplace.marketplace.entity;
 
-import javax.persistence.*;
+import com.marketplace.marketplace.entity.base.BaseEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
-public class User {
+@Table(name = "users")
+public class User extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private static final long serialVersionUID = 3010316090317258607L;
 
     private String name;
     private String surname;
@@ -24,15 +26,6 @@ public class User {
     private Set<Item> ownedItems;
 
     public User() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getName() {
