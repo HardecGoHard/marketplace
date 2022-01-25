@@ -1,13 +1,13 @@
 package com.marketplace.marketplace.repository;
 
-import com.marketplace.marketplace.entity.User;
+import com.marketplace.marketplace.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UsersRepository extends JpaRepository<User, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
 
-    Optional<User> findByUuid(String uuid);
+    Optional<Tag> findByUuid(String uuid);
 }

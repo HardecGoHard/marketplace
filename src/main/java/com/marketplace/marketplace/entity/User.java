@@ -2,6 +2,7 @@ package com.marketplace.marketplace.entity;
 
 import com.marketplace.marketplace.entity.base.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,7 +23,7 @@ public class User extends BaseEntity<Long> {
 
     private Date registrationDate;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<Item> ownedItems;
 
     public User() {
