@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+
+###LOCAL DATABASE PROPERTIES
+
+src/main/resources/config/
