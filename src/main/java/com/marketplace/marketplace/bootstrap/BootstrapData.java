@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -30,32 +31,19 @@ public class BootstrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Tag huys = new Tag();
         User owner = new User();
-        Item huy = new Item();
-
-        huys.setName("huys");
-        huys.setItems(new HashSet<Item>());
-
-
-        huy.setName("Chlen");
-        huy.setDescription("V zhope");
-        huy.setOwner(owner);
-        huy.setTags(new HashSet<Tag>());
-
-        huys.getItems().add(huy);
-        huy.getTags().add(huys);
-
-        owner.setEmail("huesos@chleni.ru");
-        owner.setName("Ruslan");
-        owner.setOwnedItems(new HashSet<Item>());
-        owner.getOwnedItems().add(huy);
-        owner.setPassword("oralCumshot");
-        owner.setSurname("aloev");
-
-        itemService.save(huy);
         userService.save(owner);
-        tagService.save(huys);
+
+        Item item = new Item();
+        item.setOwner(owner);
+        item.setName("Chlen");
+        item.setDescription("V zhope");
+
+        Tag tag = new Tag();
+        tag.setName("huys");
+        tag.setItems(Set.of(item));
+        item.setTags(Set.of(tag));
+        itemService.save(item);
 
 
     }

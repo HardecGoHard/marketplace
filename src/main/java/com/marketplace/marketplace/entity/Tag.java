@@ -12,7 +12,7 @@ public class Tag extends BaseEntity<Long> {
 
     private String name;
 
-    @ManyToMany(mappedBy = "tags", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "tags")
     private Set<Item> items;
 
     public Tag() {

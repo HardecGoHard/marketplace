@@ -23,7 +23,7 @@ public class User extends BaseEntity<Long> {
 
     private Date registrationDate;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner")
     private Set<Item> ownedItems;
 
     public User() {
