@@ -35,8 +35,9 @@ public class ItemController {
     public ItemModel createNew(
             @Validated @RequestBody ItemModel itemModel
     ) {
-        itemService.saveModel(itemModel);
 
-        return itemModel;
+        return itemModelAssembler.toModel(
+                itemService.saveModel(itemModel)
+        );
     }
 }
