@@ -1,6 +1,5 @@
 package com.marketplace.marketplace.service;
 
-import com.marketplace.marketplace.entity.Item;
 import com.marketplace.marketplace.entity.User;
 import com.marketplace.marketplace.exception.ItemNotFoundException;
 import com.marketplace.marketplace.exception.UserNotFoundException;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {

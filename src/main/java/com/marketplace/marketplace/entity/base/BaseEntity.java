@@ -2,16 +2,15 @@ package com.marketplace.marketplace.entity.base;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class BaseEntity<ID extends Serializable> implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -5503397766718991017L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private ID id;
+    private Long id;
 
     private String uuid;
 
@@ -20,11 +19,11 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
         setUuid(UUID.randomUUID().toString());
     }
 
-    public ID getId() {
+    public Long getId() {
         return id;
     }
 
-    public BaseEntity<ID> setId(ID id) {
+    public BaseEntity setId(Long id) {
         this.id = id;
         return this;
     }
@@ -33,23 +32,8 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
         return uuid;
     }
 
-    public BaseEntity<ID> setUuid(String uuid) {
+    public BaseEntity setUuid(String uuid) {
         this.uuid = uuid;
         return this;
-    }
-
-    
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BaseEntity<?> that = (BaseEntity<?>) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

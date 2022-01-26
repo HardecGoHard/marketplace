@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Tag extends BaseEntity<Long> {
+public class Tag extends BaseEntity {
 
     private static final long serialVersionUID = 604934841905852817L;
 

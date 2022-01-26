@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Item extends BaseEntity<Long> {
+public class Item extends BaseEntity {
     private static final long serialVersionUID = -3523052237621832929L;
 
     private String name;
