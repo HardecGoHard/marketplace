@@ -35,11 +35,16 @@ public class TagService {
 
     public Tag getById(Long id) {
         return tagRepository.findById(id)
-                .orElseThrow(() -> new TagNotFoundException(String.format("User by id= %d not found", id)));
+                .orElseThrow(() -> new TagNotFoundException(String.format("Tag by id= %d not found", id)));
     }
 
     public Tag getByUuid(String uuid) {
         return tagRepository.findByUuid(uuid)
-                .orElseThrow(() -> new TagNotFoundException(String.format("User by uuid= %s not found", uuid)));
+                .orElseThrow(() -> new TagNotFoundException(String.format("Tag by uuid= %s not found", uuid)));
+    }
+
+    public Tag getByName(String name) {
+        return tagRepository.findByName(name)
+                .orElseThrow(() -> new TagNotFoundException(String.format("Tag by name = %s not found", name)));
     }
 }

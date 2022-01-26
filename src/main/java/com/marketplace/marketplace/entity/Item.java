@@ -18,7 +18,7 @@ public class Item extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "item_tag", joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;

@@ -10,6 +10,7 @@ public class Tag extends BaseEntity {
 
     private static final long serialVersionUID = 604934841905852817L;
 
+    @Column(unique=true)
     private String name;
 
     @ManyToMany(mappedBy = "tags")
