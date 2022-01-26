@@ -3,6 +3,7 @@ package com.marketplace.marketplace.service;
 import com.marketplace.marketplace.entity.Item;
 import com.marketplace.marketplace.entity.User;
 import com.marketplace.marketplace.exception.ItemNotFoundException;
+import com.marketplace.marketplace.exception.UserNotFoundException;
 import com.marketplace.marketplace.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,11 @@ public class UserService {
 
     public User getById(Long id) {
         return usersRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException(String.format("User by id= %d not found", id)));
+                .orElseThrow(() -> new UserNotFoundException(String.format("User by id= %d not found", id)));
     }
 
     public User getByUuid(String uuid) {
         return usersRepository.findByUuid(uuid)
-                .orElseThrow(() -> new ItemNotFoundException(String.format("User by uuid= %s not found", uuid)));
+                .orElseThrow(() -> new UserNotFoundException(String.format("User by uuid= %s not found", uuid)));
     }
 }

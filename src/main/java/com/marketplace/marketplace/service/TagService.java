@@ -1,7 +1,7 @@
 package com.marketplace.marketplace.service;
 
 import com.marketplace.marketplace.entity.Tag;
-import com.marketplace.marketplace.exception.ItemNotFoundException;
+import com.marketplace.marketplace.exception.TagNotFoundException;
 import com.marketplace.marketplace.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +35,11 @@ public class TagService {
 
     public Tag getById(Long id) {
         return tagRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException(String.format("User by id= %d not found", id)));
+                .orElseThrow(() -> new TagNotFoundException(String.format("User by id= %d not found", id)));
     }
 
     public Tag getByUuid(String uuid) {
         return tagRepository.findByUuid(uuid)
-                .orElseThrow(() -> new ItemNotFoundException(String.format("User by uuid= %s not found", uuid)));
+                .orElseThrow(() -> new TagNotFoundException(String.format("User by uuid= %s not found", uuid)));
     }
 }
