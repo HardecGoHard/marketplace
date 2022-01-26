@@ -52,10 +52,10 @@ public class TagService {
                 .orElseThrow(() -> new TagNotFoundException(String.format("Tag by name = %s not found", name)));
     }
 
-    public Tag buildTagByName(String name) {
-        Optional<Tag> inDbTag = tagRepository.findByName(name);
-        if (inDbTag.isPresent()) {
-            return inDbTag.get();
+    public Tag buildPersistTagEntityByName(String name) {
+        Optional<Tag> tagEntity = tagRepository.findByName(name);
+        if (tagEntity.isPresent()) {
+            return tagEntity.get();
         } else {
             Tag newTag = new Tag();
             newTag.setName(name);
@@ -64,10 +64,10 @@ public class TagService {
         }
     }
 
-    public Set<Tag> buildTagsByNames(Set<String> tagStrings) {
+    public Set<Tag> getPersistTagsByNames(Set<String> tagStrings) {
         Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tagStrings) {
-            tagSet.add(buildTagByName(tagName));
+            tagSet.add(buildPersistTagEntityByName(tagName));
         }
         return tagSet;
     }

@@ -30,17 +30,13 @@ public class ItemController {
         );
     }
 
-    @GetMapping("new")
-    public ItemModel createNew() {
-        return new ItemModel();
-    }
-
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("new")
+    @PostMapping()
     public ItemModel createNew(
             @Validated @RequestBody ItemModel itemModel
     ) {
-        //itemService.create(ItemModel);
+        itemService.saveModel(itemModel);
+
         return itemModel;
     }
 }

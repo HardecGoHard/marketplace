@@ -55,16 +55,16 @@ public class ItemService {
         item.setName(model.getName());
         item.setDescription(model.getDescription());
         item.setOwner(usersRepository.findByUuid(model.getOwnerUuid()).orElse(null));
-        item.setTags(tagService.buildTagsByNames(model.getTags()));
+        item.setTags(tagService.getPersistTagsByNames(model.getTags()));
 
         return item;
     }
 
-    private boolean modelExists(ItemModel model){
+    public boolean modelExists(ItemModel model){
         return itemRepository.existsById(model.getId());
     }
 
-    private Item saveModel(ItemModel model){
+    public Item saveModel(ItemModel model){
         Item item = buildItemEntityFromModel(model);
         itemRepository.save(item);
         return item;
