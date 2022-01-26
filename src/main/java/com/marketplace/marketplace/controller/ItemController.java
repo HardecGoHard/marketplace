@@ -4,10 +4,9 @@ import com.marketplace.marketplace.assembler.ItemModelAssembler;
 import com.marketplace.marketplace.model.ItemModel;
 import com.marketplace.marketplace.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("item")
@@ -29,5 +28,19 @@ public class ItemController {
         return itemModelAssembler.toModel(
                 itemService.getById(id)
         );
+    }
+
+    @GetMapping("new")
+    public ItemModel createNew() {
+        return new ItemModel();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("new")
+    public ItemModel createNew(
+            @Validated @RequestBody ItemModel itemModel
+    ) {
+        //itemService.create(ItemModel);
+        return itemModel;
     }
 }
