@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     Optional<Item> findByUuid(String uuid);
+
+    Boolean existsByUuid(String uuid);
 }

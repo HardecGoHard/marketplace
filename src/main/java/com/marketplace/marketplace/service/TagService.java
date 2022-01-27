@@ -6,7 +6,10 @@ import com.marketplace.marketplace.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TagService {
@@ -20,6 +23,7 @@ public class TagService {
     public void save(Tag tag) {
         tagRepository.save(tag);
     }
+
 
     public void delete(Tag tag) {
         tagRepository.delete(tag);
@@ -46,5 +50,25 @@ public class TagService {
     public Tag getByName(String name) {
         return tagRepository.findByName(name)
                 .orElseThrow(() -> new TagNotFoundException(String.format("Tag by name = %s not found", name)));
+    }
+
+    public Tag buildTagByName(String name) {
+        Optional<Tag> inDbTag = tagRepository.findByName(name);
+        if (inDbTag.isPresent()) {
+            return inDbTag.get();
+        } else {
+            Tag newTag = new Tag();
+            newTag.setName(name);
+            tagRepository.save(newTag);
+            return newTag;
+        }
+    }
+
+    public Set<Tag> buildTagsByNames(Set<String> tagStrings) {
+        Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tagStrings) {
+            tagSet.add(buildTagByName(tagName));
+        }
+        return tagSet;
     }
 }
