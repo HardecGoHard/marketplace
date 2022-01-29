@@ -14,6 +14,7 @@ public class User extends BaseEntity {
 
     private String name;
     private String surname;
+    private String username;
 
     private String email;
     private String password;
@@ -27,6 +28,16 @@ public class User extends BaseEntity {
     private Set<Item> ownedItems;
 
     public User() {
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public User setUsername(String username) {
+        this.username = username;
+        return this;
     }
 
     public String getName() {
