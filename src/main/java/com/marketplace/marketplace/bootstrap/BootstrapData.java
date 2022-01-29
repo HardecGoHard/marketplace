@@ -1,6 +1,7 @@
 package com.marketplace.marketplace.bootstrap;
 
 import com.marketplace.marketplace.entity.Item;
+import com.marketplace.marketplace.entity.Status;
 import com.marketplace.marketplace.entity.Tag;
 import com.marketplace.marketplace.entity.User;
 import com.marketplace.marketplace.service.ItemService;
@@ -32,6 +33,8 @@ public class BootstrapData implements CommandLineRunner {
 
         //user
         User owner = new User();
+        owner.setStatus(Status.ACTIVE);
+
         userService.save(owner);
 
         //first tag

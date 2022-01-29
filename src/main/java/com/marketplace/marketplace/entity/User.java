@@ -2,10 +2,7 @@ package com.marketplace.marketplace.entity;
 
 import com.marketplace.marketplace.entity.base.BaseEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,6 +18,9 @@ public class User extends BaseEntity {
     private String email;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     private Date registrationDate;
 
     @OneToMany(mappedBy = "owner")
@@ -35,6 +35,15 @@ public class User extends BaseEntity {
 
     public User setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public User setStatus(Status status) {
+        this.status = status;
         return this;
     }
 
