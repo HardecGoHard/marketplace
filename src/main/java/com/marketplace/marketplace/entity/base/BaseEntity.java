@@ -1,11 +1,8 @@
 package com.marketplace.marketplace.entity.base;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -17,30 +14,37 @@ public abstract class BaseEntity implements Serializable {
     private Long id;
 
     private String uuid;
-    @CreationTimestamp
-    private Instant createdAt;
-    @UpdateTimestamp
-    private Instant updatedAt;
+
+    private Date createdAt;
+
+    private Date updatedAt;
 
     @PrePersist
     public void prePersist() {
         setUuid(UUID.randomUUID().toString());
+        setCreatedAt(new Date());
     }
 
-    public Instant getCreatedAt() {
+    @PreUpdate
+    public void prePersistUuid() {
+       setUpdatedAt(new Date());
+    }
+
+
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public BaseEntity setCreatedAt(Instant createdAt) {
+    public BaseEntity setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
 
-    public Instant getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public BaseEntity setUpdatedAt(Instant updatedAt) {
+    public BaseEntity setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }

@@ -3,9 +3,9 @@ package com.marketplace.marketplace.exception;
 import java.util.Date;
 
 public class RestErrorMessage {
-    private int statusCode;
-    private Date timestamp;
-    private String message;
+    private final int statusCode;
+    private final Date timestamp;
+    private final String message;
 
     public RestErrorMessage(int statusCode, Date timestamp, String message) {
         this.statusCode = statusCode;
