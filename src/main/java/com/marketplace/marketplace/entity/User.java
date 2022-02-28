@@ -14,13 +14,19 @@ public class User extends BaseEntity {
 
     private String name;
     private String surname;
+
+    @Column(unique = true)
     private String username;
 
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+    private String refreshCode;
 
     private Date registrationDate;
 
@@ -100,6 +106,24 @@ public class User extends BaseEntity {
 
     public User setOwnedItems(Set<Item> ownedItems) {
         this.ownedItems = ownedItems;
+        return this;
+    }
+
+    public String getRefreshCode() {
+        return refreshCode;
+    }
+
+    public User setRefreshCode(String refreshCode) {
+        this.refreshCode = refreshCode;
+        return this;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public User setRole(Role role) {
+        this.role = role;
         return this;
     }
 }
