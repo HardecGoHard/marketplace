@@ -1,14 +1,12 @@
 package com.marketplace.marketplace.bootstrap;
 
-import com.marketplace.marketplace.entity.Item;
-import com.marketplace.marketplace.entity.Status;
-import com.marketplace.marketplace.entity.Tag;
-import com.marketplace.marketplace.entity.User;
+import com.marketplace.marketplace.entity.*;
 import com.marketplace.marketplace.service.ItemService;
 import com.marketplace.marketplace.service.TagService;
 import com.marketplace.marketplace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -19,12 +17,14 @@ public class BootstrapData implements CommandLineRunner {
     private final ItemService itemService;
     private final UserService userService;
     private final TagService tagService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public BootstrapData(ItemService itemService, UserService userService, TagService tagService) {
+    public BootstrapData(ItemService itemService, UserService userService, TagService tagService, PasswordEncoder passwordEncoder) {
         this.itemService = itemService;
         this.userService = userService;
         this.tagService = tagService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -34,7 +34,10 @@ public class BootstrapData implements CommandLineRunner {
         //user
         User owner = new User();
         owner.setStatus(Status.ACTIVE);
-
+        owner.setUsername("dizing");
+        owner.setPassword(passwordEncoder.encode("trueHacker"));
+        owner.setRole(Role.USER);
+        owner.setRefreshCode("112");
         userService.save(owner);
 
         //first tag
