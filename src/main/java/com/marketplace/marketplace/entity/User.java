@@ -4,7 +4,6 @@ import com.marketplace.marketplace.entity.base.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,41 +22,17 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private Date registrationDate;
 
     @OneToMany(mappedBy = "owner")
     private Set<Item> ownedItems;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-
-    private Date lastVisit;
-
     public User() {
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public User setRoles(Set<Role> roles) {
-        this.roles = roles;
-        return this;
-    }
 
     public String getUsername() {
         return username;
-    }
-
-    public Date getLastVisit() {
-        return lastVisit;
-    }
-
-    public User setLastVisit(Date lastVisit) {
-        this.lastVisit = lastVisit;
-        return this;
     }
 
     public User setUsername(String username) {
@@ -110,6 +85,14 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public User setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+        return this;
+    }
 
     public Set<Item> getOwnedItems() {
         return ownedItems;
