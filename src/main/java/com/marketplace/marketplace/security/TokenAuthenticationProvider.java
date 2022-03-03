@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -30,15 +31,18 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
         TokenPairModel tokens = (TokenPairModel) authentication.getCredentials();
         Collection<SimpleGrantedAuthority> authorities = new LinkedList<>();
+
         if (tokens.getAccessToken() != null && tokenProvider.validateToken(tokens.getAccessToken())) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + tokenProvider.getRoleFromAccessToken(tokens.getAccessToken())));
-            return new UsernamePasswordAuthenticationToken("TokenPair", tokens, authorities);
+            UserPrincipal userPrincipal = tokenProvider.parseAccessToken(tokens.getAccessToken());
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + userPrincipal.getRole()));
+            return new UsernamePasswordAuthenticationToken(userPrincipal, tokens.getAccessToken(), authorities);
+        } else if (tokens.getRefreshToken() != null && tokenProvider.validateToken(tokens.getRefreshToken())) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER_REFRESH"));//special role for refreshToken
+                                                                                 //refreshId would be checked later
+                                                                                 //in /refresh logic
+            return new UsernamePasswordAuthenticationToken("REFRESH_TOKEN", tokens.getRefreshToken(), authorities);
         }
-        if (tokens.getRefreshToken() != null && tokenProvider.validateToken(tokens.getRefreshToken())) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER_REFRESH"));
-            return new UsernamePasswordAuthenticationToken("TokenPair", tokens, authorities);
-        }
-        throw new BadCredentialsException("bad mock");
+        throw new BadCredentialsException("token not valid");
     }
 
     @Override
