@@ -1,6 +1,7 @@
 package com.marketplace.marketplace.bootstrap;
 
 import com.marketplace.marketplace.entity.*;
+import com.marketplace.marketplace.repository.UserRepository;
 import com.marketplace.marketplace.service.ItemService;
 import com.marketplace.marketplace.service.TagService;
 import com.marketplace.marketplace.service.UserService;
@@ -16,13 +17,15 @@ public class BootstrapData implements CommandLineRunner {
 
     private final ItemService itemService;
     private final UserService userService;
+    private final UserRepository userRepository;
     private final TagService tagService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public BootstrapData(ItemService itemService, UserService userService, TagService tagService, PasswordEncoder passwordEncoder) {
+    public BootstrapData(ItemService itemService, UserService userService, UserRepository userRepository, TagService tagService, PasswordEncoder passwordEncoder) {
         this.itemService = itemService;
         this.userService = userService;
+        this.userRepository = userRepository;
         this.tagService = tagService;
         this.passwordEncoder = passwordEncoder;
     }

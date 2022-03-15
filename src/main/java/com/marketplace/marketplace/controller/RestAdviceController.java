@@ -1,9 +1,9 @@
 package com.marketplace.marketplace.controller;
 
-import com.marketplace.marketplace.exception.ItemNotFoundException;
+import com.marketplace.marketplace.exception.entity.ItemNotFoundException;
 import com.marketplace.marketplace.exception.RestErrorMessage;
-import com.marketplace.marketplace.exception.TagNotFoundException;
-import com.marketplace.marketplace.exception.UserNotFoundException;
+import com.marketplace.marketplace.exception.entity.TagNotFoundException;
+import com.marketplace.marketplace.exception.entity.UserNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
