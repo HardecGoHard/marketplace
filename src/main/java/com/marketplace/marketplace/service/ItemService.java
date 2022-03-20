@@ -7,7 +7,7 @@ import com.marketplace.marketplace.repository.ItemRepository;
 import com.marketplace.marketplace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//TODO make service place the owner by the security context, not by the passed id
 @Service
 public class ItemService extends AbstractService<Item, Long> {
     private final ItemRepository itemRepository;

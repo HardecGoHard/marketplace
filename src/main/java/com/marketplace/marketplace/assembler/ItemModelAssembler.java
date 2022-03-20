@@ -5,7 +5,7 @@ import com.marketplace.marketplace.model.ItemModel;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-
+//TODO make item model return TAGS not just as names, but as TagModel
 @Component
 public class ItemModelAssembler extends BaseModelAssembler<Item, ItemModel> {
 
