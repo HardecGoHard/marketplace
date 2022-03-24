@@ -2,11 +2,12 @@ package com.marketplace.marketplace.model.base;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Objects;
 
 @JsonPropertyOrder("id")
-public abstract class BaseModel<M> extends EntityModel<M> {
+public abstract class BaseModel<M extends RepresentationModel<? extends M>> extends RepresentationModel<M> {
 
     private Long id;
 

@@ -3,6 +3,7 @@ package com.marketplace.marketplace.assembler;
 import com.marketplace.marketplace.controller.ItemController;
 import com.marketplace.marketplace.entity.Item;
 import com.marketplace.marketplace.model.ItemModel;
+import com.marketplace.marketplace.model.TagModel;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class ItemModelAssembler extends BaseModelAssembler<Item, ItemModel> {
 
-    protected ItemModelAssembler() {
+    private final TagModelAssembler tagModelAssembler;
+
+    protected ItemModelAssembler(TagModelAssembler tagModelAssembler) {
         super(ItemModel.class);
+        this.tagModelAssembler = tagModelAssembler;
     }
 
     @Override
@@ -41,7 +45,7 @@ public class ItemModelAssembler extends BaseModelAssembler<Item, ItemModel> {
     public List<Link> getDefaultItemLinks(ItemModel model) {
         return List.of(
                 linkTo(methodOn(ItemController.class).getItemById(model.getId())).withSelfRel()
-                //linkTo(methodOn(ItemController.class).getAllItems(new PageImpl<Item>())).withRel("items")
+                // linkTo(methodOn(ItemController.class).getAllItems(new PageImpl<Item>())).withRel("items")
         );
     }
 
