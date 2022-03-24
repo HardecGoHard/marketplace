@@ -20,7 +20,7 @@ public class UserService extends AbstractService<User, Long> {
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        super(userRepository, UserNotFoundException::new);
+        super(userRepository);
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }

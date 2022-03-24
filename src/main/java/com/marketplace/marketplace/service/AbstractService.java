@@ -2,20 +2,15 @@ package com.marketplace.marketplace.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.function.Supplier;
 
 public abstract class AbstractService<E, I> implements CrudService<E, I> {
 
     private final JpaRepository<E, I> jpaRepository;
-    private final Supplier<? extends RuntimeException> exceptionSupplier;
 
-    protected AbstractService(
-            JpaRepository<E, I> jpaRepository,
-            Supplier<? extends RuntimeException> exceptionSupplier
-    ) {
+    protected AbstractService(JpaRepository<E, I> jpaRepository) {
         this.jpaRepository = jpaRepository;
-        this.exceptionSupplier = exceptionSupplier;
     }
 
     @Override
@@ -31,7 +26,7 @@ public abstract class AbstractService<E, I> implements CrudService<E, I> {
     @Override
     public E findById(I entityId) {
         return jpaRepository.findById(entityId)
-                                .orElseThrow(exceptionSupplier);
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override

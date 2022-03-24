@@ -17,7 +17,7 @@ public class TagService extends  AbstractService<Tag, Long>{
 
     @Autowired
     public TagService(TagRepository tagRepository) {
-        super(tagRepository, TagNotFoundException::new);
+        super(tagRepository);
         this.tagRepository = tagRepository;
     }
 

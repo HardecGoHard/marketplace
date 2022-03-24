@@ -6,6 +6,8 @@ import com.marketplace.marketplace.model.ItemModel;
 import com.marketplace.marketplace.repository.ItemRepository;
 import com.marketplace.marketplace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 //TODO make service place the owner by the security context, not by the passed id
 @Service
@@ -20,7 +22,7 @@ public class ItemService extends AbstractService<Item, Long> {
             UserRepository userRepository,
             TagService tagService
     ) {
-        super(itemRepository, ItemNotFoundException::new);
+        super(itemRepository);
         this.itemRepository = itemRepository;
         this.userRepository = userRepository;
         this.tagService = tagService;
@@ -28,7 +30,7 @@ public class ItemService extends AbstractService<Item, Long> {
 
     public Item getByUuid(String uuid) {
         return itemRepository.findByUuid(uuid)
-                                    .orElseThrow(ItemNotFoundException::new);
+                .orElseThrow(ItemNotFoundException::new);
     }
 
     public boolean modelExists(ItemModel model) {
@@ -38,6 +40,10 @@ public class ItemService extends AbstractService<Item, Long> {
     public Item saveModel(ItemModel model) {
         Item item = buildItemEntityFromModel(model);
         return save(item);
+    }
+
+    public Page<Item> getAllPageble(Pageable pageable) {
+        return itemRepository.findAll(pageable);
     }
 
     private Item buildItemEntityFromModel(ItemModel model) {
