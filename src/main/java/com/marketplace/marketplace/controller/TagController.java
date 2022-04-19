@@ -4,7 +4,12 @@ import com.marketplace.marketplace.assembler.TagModelAssembler;
 import com.marketplace.marketplace.entity.Tag;
 import com.marketplace.marketplace.model.ItemModel;
 import com.marketplace.marketplace.model.TagModel;
+import com.marketplace.marketplace.security.UserPrincipal;
 import com.marketplace.marketplace.service.TagService;
+import org.apache.catalina.core.ApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

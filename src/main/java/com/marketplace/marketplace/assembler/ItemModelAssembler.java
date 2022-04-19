@@ -44,7 +44,7 @@ public class ItemModelAssembler extends BaseModelAssembler<Item, ItemModel> {
 
     public List<Link> getDefaultItemLinks(ItemModel model) {
         return List.of(
-                linkTo(methodOn(ItemController.class).getItemById(model.getId())).withSelfRel()
+         //      linkTo(methodOn(ItemController.class).getItemById(model.getId())).withSelfRel()
                 // linkTo(methodOn(ItemController.class).getAllItems(new PageImpl<Item>())).withRel("items")
         );
     }
