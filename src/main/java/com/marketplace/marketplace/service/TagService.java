@@ -2,14 +2,17 @@ package com.marketplace.marketplace.service;
 
 import com.marketplace.marketplace.entity.Tag;
 import com.marketplace.marketplace.exception.entity.TagNotFoundException;
+import com.marketplace.marketplace.model.TagModel;
 import com.marketplace.marketplace.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TagService extends  AbstractService<Tag, Long>{
@@ -21,10 +24,9 @@ public class TagService extends  AbstractService<Tag, Long>{
         this.tagRepository = tagRepository;
     }
 
-
-    public Tag getByUuid(String uuid) {
-        return tagRepository.findByUuid(uuid)
-                .orElseThrow(() -> new TagNotFoundException(String.format("Tag by uuid= %s not found", uuid)));
+    public void deleteById(Long id){
+        Tag tag = findById(id);
+        delete(tag);
     }
 
     public Tag getByName(String name) {
@@ -44,11 +46,22 @@ public class TagService extends  AbstractService<Tag, Long>{
         }
     }
 
-    public Set<Tag> getPersistTagsByNames(Set<String> tagStrings) {
+    public Page<Tag> findAllPageble(Pageable pageable){
+        return tagRepository.findAll(pageable);
+    }
+
+    public Set<Tag> getPersistTagsSetName(Set<String> tagNames) {
         Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tagStrings) {
+        for (String tagName : tagNames) {
             tagSet.add(buildPersistTagEntityByName(tagName));
         }
+        return tagSet;
+    }
+
+    public Set<Tag> getPersistTagsByTagModelsSet(Set<TagModel> tagModelSet) {
+        Set<Tag> tagSet = tagModelSet
+                .stream().map( tag -> buildPersistTagEntityByName(tag.getName()))
+                .collect(Collectors.toSet());
         return tagSet;
     }
 }

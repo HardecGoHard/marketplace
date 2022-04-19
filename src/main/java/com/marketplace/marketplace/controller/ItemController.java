@@ -3,7 +3,6 @@ package com.marketplace.marketplace.controller;
 import com.marketplace.marketplace.assembler.ItemModelAssembler;
 import com.marketplace.marketplace.entity.Item;
 import com.marketplace.marketplace.model.ItemModel;
-import com.marketplace.marketplace.security.UserPrincipal;
 import com.marketplace.marketplace.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +10,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +50,17 @@ public class ItemController {
     ) {
 
         return itemModelAssembler.toModel(
-                itemService.saveModel(itemModel)
+                itemService.save(itemModel)
+        );
+    }
+
+    @PutMapping("{id}")
+    public ItemModel update(
+            @Validated @RequestBody ItemModel itemModel
+    ) {
+
+        return itemModelAssembler.toModel(
+                itemService.update(itemModel)
         );
     }
 }

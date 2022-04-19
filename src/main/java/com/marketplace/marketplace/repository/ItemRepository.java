@@ -11,9 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    Optional<Item> findByUuid(String uuid);
-
     Page<Item> findAll(Pageable pageable);
 
-    Boolean existsByUuid(String uuid);
 }

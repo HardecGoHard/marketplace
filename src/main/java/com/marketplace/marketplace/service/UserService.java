@@ -26,13 +26,6 @@ public class UserService extends AbstractService<User, Long> {
     }
 
 
-    public User getByUuid(String uuid) {
-        return userRepository.findByUuid(uuid)
-                .orElseThrow(
-                        () -> new UserNotFoundException(String.format("User by uuid= %s not found", uuid))
-                );
-    }
-
     public User getByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(

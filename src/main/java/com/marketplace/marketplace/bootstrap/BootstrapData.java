@@ -33,11 +33,12 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+/*
         //user
         User owner = new User();
         owner.setStatus(Status.ACTIVE);
         owner.setUsername("dizing");
+    //    String encode = passwordEncoder.encode("trueHacker");
         owner.setPassword(passwordEncoder.encode("trueHacker"));
         owner.setRole(Role.USER);
         owner.setRefreshCode("112");
@@ -66,6 +67,7 @@ public class BootstrapData implements CommandLineRunner {
         item.getTags().add(tag2);
 
         itemService.save(item);
-
+*/
     }
+
 }

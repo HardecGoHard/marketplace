@@ -9,9 +9,9 @@ public class ItemModel extends BaseModel<ItemModel> {
 
     private String description;
 
-    private String ownerUuid;
+    private Long ownerId;
 
-    private Set<String> tags;
+    private Set<TagModel> tags;
 
     public String getName() {
         return name;
@@ -31,20 +31,20 @@ public class ItemModel extends BaseModel<ItemModel> {
         return this;
     }
 
-    public String getOwnerUuid() {
-        return ownerUuid;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public ItemModel setOwnerUuid(String ownerUuid) {
-        this.ownerUuid = ownerUuid;
+    public ItemModel setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
         return this;
     }
 
-    public Set<String> getTags() {
+    public Set<TagModel> getTags() {
         return tags;
     }
 
-    public ItemModel setTags(Set<String> tags) {
+    public ItemModel setTags(Set<TagModel> tags) {
         this.tags = tags;
         return this;
     }

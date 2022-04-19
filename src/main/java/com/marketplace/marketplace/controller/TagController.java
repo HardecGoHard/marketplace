@@ -2,19 +2,16 @@ package com.marketplace.marketplace.controller;
 
 import com.marketplace.marketplace.assembler.TagModelAssembler;
 import com.marketplace.marketplace.entity.Tag;
-import com.marketplace.marketplace.model.ItemModel;
 import com.marketplace.marketplace.model.TagModel;
-import com.marketplace.marketplace.security.UserPrincipal;
 import com.marketplace.marketplace.service.TagService;
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("tag")
@@ -22,9 +19,17 @@ public class TagController {
     private TagService tagService;
     private TagModelAssembler tagModelAssembler;
 
-    public TagController(TagService tagService, TagModelAssembler tagModelAssembler) {
+    private final PagedResourcesAssembler<Tag> pagedResourcesAssembler;
+
+
+    public TagController(
+            TagService tagService,
+            TagModelAssembler tagModelAssembler,
+            PagedResourcesAssembler<Tag> pagedResourcesAssembler
+    ) {
         this.tagService = tagService;
         this.tagModelAssembler = tagModelAssembler;
+        this.pagedResourcesAssembler = pagedResourcesAssembler;
     }
 
     @GetMapping("{id}")
@@ -38,15 +43,12 @@ public class TagController {
     }
 
     @GetMapping()
-    public List<TagModel> getAllTags() {
-        return tagService.getAll().stream()
-                .map(entity -> tagModelAssembler.toModel(entity))
-                .collect(Collectors.toList());
+    public PagedModel<TagModel> getAllTags(@PageableDefault Pageable pageable) {
+        return pagedResourcesAssembler.toModel(tagService.findAllPageble(pageable), tagModelAssembler);
     }
 
     @DeleteMapping("{id}")
-    public List<TagModel> deleteTag(@PathVariable Long id) {
-        tagService.delete(tagService.findById(id));
-        return getAllTags();
+    public void deleteTag(@PathVariable Long id) {
+        tagService.deleteById(id);
     }
 }

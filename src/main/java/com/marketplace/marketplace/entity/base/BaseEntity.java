@@ -16,16 +16,11 @@ public abstract class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String uuid;
     @CreationTimestamp
     private Instant createdAt;
     @UpdateTimestamp
     private Instant updatedAt;
 
-    @PrePersist
-    public void prePersist() {
-        setUuid(UUID.randomUUID().toString());
-    }
 
     public Instant getCreatedAt() {
         return createdAt;
@@ -54,12 +49,4 @@ public abstract class BaseEntity implements Serializable {
         return this;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public BaseEntity setUuid(String uuid) {
-        this.uuid = uuid;
-        return this;
-    }
 }
