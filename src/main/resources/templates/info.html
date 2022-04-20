@@ -84,66 +84,71 @@
     </div>
 </nav>
 
+
 <div class="container my-5">
 
-    <div class="h3 text-center">Все товары</div>
-    <hr>
-
-    <div class="row">
-
-        <div class="d-flex col-md-4 mb-3">
-            <div class="card p-2 box-shadow">
-
-                <img class="card-img-top"
-                     src="../static/images/9f8fdff471b7d281f81f694c100b5adc.png"
-                     alt="Card image cap">
-                <div class="card-body pb-0">
-
-                    <h5 class="card-title">Название предмета</h5>
-
-                    <p class="card-text">Описание Описание Описание Описание
-                        Описание Описание Описание Описание Описание</p>
-
-                    <hr>
-
-                    <div class="text-center align-items-center mb-1">
-                        <h4 class="mb-1 me-1">$13.99</h4>
-                        <span class="text-danger"><s>$20.99</s></span>
-                    </div>
-
-                    <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-outline-primary btn-sm" type="button">Описание</button>
-                        <button class="btn btn-primary btn-sm mt-2" type="button">
-                            Добавить  в корзину
-                        </button>
+    <div class="card p-4">
+        <div class="row">
+            <div class="col-sm-5 border-right">
+                <div class="gallery-wrap mt-4">
+                    <div class="">
+                        <div>
+                            <a href="#"><img width="550" height="400"
+                                             src="../static/images/9f8fdff471b7d281f81f694c100b5adc.png"></a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-7">
+                <div class="card-body p-5">
+                    <h3 class="title mb-3">Название предмета</h3>
+
+                    <p class="price-detail-wrap">
+                    <div class="price h3 text-warning">
+                        <h4 class="mb-1 me-1">$13.99</h4>
+                        <span class="text-danger small"><s>$20.99</s></span>
+                    </div>
+
+                    </p>
+                    <div class="item-property">
+                        <p class="h5">Описание</p>
+                        <dd><p>Описание Описание Описание Описание
+                            Описание Описание Описание Описание Описание </p></dd>
+                    </div>
+                    <div class="param param-feature">
+                        <p class="h5">Доставка</p>
+                        <div>Россия, США, Европа</div>
+                    </div>  <!-- item-property-hor .// -->
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="param param-inline">
+                                <dt>Количество:</dt>
+                                <div>
+                                    <select class="form-control form-control-sm" style="width:70px;">
+                                        <option> 1</option>
+                                        <option> 2</option>
+                                        <option> 3</option>
+                                        <option> 4</option>
+                                        <option> 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase"> Купить </a>
+                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i
+                            class="fas fa-shopping-cart"></i> Добавить в корзину </a>
+                </div>
+            </div>
         </div>
-
-
     </div>
 
 
-    <nav aria-label="pagination-example ">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
 </div>
+
 
 <!-- Footer -->
 <footer class="page-footer font-small mt-auto bg-primary">
