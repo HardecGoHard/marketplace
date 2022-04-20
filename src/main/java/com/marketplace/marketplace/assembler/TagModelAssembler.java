@@ -1,13 +1,16 @@
 package com.marketplace.marketplace.assembler;
 
+import com.marketplace.marketplace.controller.TagController;
 import com.marketplace.marketplace.entity.Tag;
 import com.marketplace.marketplace.model.TagModel;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-//TODO think about logic of counting items, will it fetch all items?
-// maybe write count method in repository
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+
 @Component
 public class TagModelAssembler extends BaseModelAssembler<Tag, TagModel> {
 
@@ -26,6 +29,7 @@ public class TagModelAssembler extends BaseModelAssembler<Tag, TagModel> {
         else
             model.setUsageCount(0);
 
+        model.add(linkTo(methodOn(TagController.class).getItemById(entity.getId())).withSelfRel());
         return model;
     }
 
