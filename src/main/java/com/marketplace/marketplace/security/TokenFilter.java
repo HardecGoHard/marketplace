@@ -1,6 +1,6 @@
 package com.marketplace.marketplace.security;
 
-import com.marketplace.marketplace.model.TokenPairModel;
+import com.marketplace.marketplace.dto.TokenPairModel;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +12,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class TokenFilter extends GenericFilterBean {
     @Override

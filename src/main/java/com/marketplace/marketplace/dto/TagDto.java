@@ -1,20 +1,20 @@
-package com.marketplace.marketplace.model;
+package com.marketplace.marketplace.dto;
 
-import com.marketplace.marketplace.model.base.BaseModel;
+import com.marketplace.marketplace.dto.base.BaseModel;
 
-public class TagModel extends BaseModel<TagModel> {
+public class TagDto extends BaseModel<TagDto> {
 
     private String name;
     private int usageCount;
 
-    public TagModel() {
+    public TagDto() {
     }
 
     public String getName() {
         return name;
     }
 
-    public TagModel setName(String name) {
+    public TagDto setName(String name) {
         this.name = name;
         return this;
     }
@@ -23,7 +23,7 @@ public class TagModel extends BaseModel<TagModel> {
         return usageCount;
     }
 
-    public TagModel setUsageCount(int usageCount) {
+    public TagDto setUsageCount(int usageCount) {
         this.usageCount = usageCount;
         return this;
     }

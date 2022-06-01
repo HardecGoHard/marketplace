@@ -28,13 +28,14 @@ public class User extends BaseEntity {
     private Status status;
     private String refreshCode;
 
+    private String avatar;
     private Date registrationDate;
 
     @OneToMany(mappedBy = "owner")
     private Set<Item> ownedItems;
 
-    public User() {
-    }
+    @OneToMany(mappedBy = "author")
+    private Set<Comment> comments;
 
 
     public String getUsername() {
@@ -124,6 +125,24 @@ public class User extends BaseEntity {
 
     public User setRole(Role role) {
         this.role = role;
+        return this;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public User setComments(Set<Comment> comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public User setAvatar(String avatar) {
+        this.avatar = avatar;
         return this;
     }
 }
