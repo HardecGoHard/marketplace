@@ -16,9 +16,6 @@ public class Tag extends BaseEntity {
     @ManyToMany(mappedBy = "tags")
     private Set<Item> items;
 
-    public Tag() {
-    }
-
     public String getName() {
         return name;
     }

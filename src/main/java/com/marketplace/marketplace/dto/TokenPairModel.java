@@ -1,4 +1,4 @@
-package com.marketplace.marketplace.model;
+package com.marketplace.marketplace.dto;
 
 public class TokenPairModel {
     private String accessToken;

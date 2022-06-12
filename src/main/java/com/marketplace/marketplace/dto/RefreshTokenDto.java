@@ -1,18 +1,18 @@
-package com.marketplace.marketplace.model;
+package com.marketplace.marketplace.dto;
 
-public class RefreshTokenModel {
+public class RefreshTokenDto {
     private String username;
     private Long id;
     private String refreshCode;
 
-    public RefreshTokenModel() {
+    public RefreshTokenDto() {
     }
 
     public String getUsername() {
         return username;
     }
 
-    public RefreshTokenModel setUsername(String username) {
+    public RefreshTokenDto setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -21,7 +21,7 @@ public class RefreshTokenModel {
         return id;
     }
 
-    public RefreshTokenModel setId(Long id) {
+    public RefreshTokenDto setId(Long id) {
         this.id = id;
         return this;
     }
@@ -30,7 +30,7 @@ public class RefreshTokenModel {
         return refreshCode;
     }
 
-    public RefreshTokenModel setRefreshCode(String refreshCode) {
+    public RefreshTokenDto setRefreshCode(String refreshCode) {
         this.refreshCode = refreshCode;
         return this;
     }

@@ -13,15 +13,23 @@ public class Item extends BaseEntity {
     private String name;
 
     private String description;
-
+    @Column(name = "owner_id", insertable = false, updatable = false)
+    private Long ownerId;
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+
+    @OneToMany(mappedBy = "item")
+    private Set<Comment> comments;
 
     @ManyToMany
     @JoinTable(name = "item_tag", joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
+
+    private Double price;
+
+    private String avatar;
 
     public Item() {
     }
@@ -59,6 +67,42 @@ public class Item extends BaseEntity {
 
     public Item setTags(Set<Tag> tags) {
         this.tags = tags;
+        return this;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Item setPrice(Double price) {
+        this.price = price;
+        return this;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public Item setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+        return this;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public Item setAvatar(String avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public Item setComments(Set<Comment> comments) {
+        this.comments = comments;
         return this;
     }
 }

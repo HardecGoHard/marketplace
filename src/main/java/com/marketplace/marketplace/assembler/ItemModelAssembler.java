@@ -1,13 +1,12 @@
 package com.marketplace.marketplace.assembler;
 
 import com.marketplace.marketplace.controller.ItemController;
+import com.marketplace.marketplace.dto.ItemDto;
+import com.marketplace.marketplace.dto.TagDto;
 import com.marketplace.marketplace.entity.Item;
-import com.marketplace.marketplace.model.ItemModel;
-import com.marketplace.marketplace.model.TagModel;
-import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,31 +15,36 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Component
-public class ItemModelAssembler extends BaseModelAssembler<Item, ItemModel> {
+public class ItemModelAssembler extends BaseModelAssembler<Item, ItemDto> {
 
     private final TagModelAssembler tagModelAssembler;
 
     protected ItemModelAssembler(TagModelAssembler tagModelAssembler) {
-        super(ItemModel.class);
+        super(ItemDto.class);
         this.tagModelAssembler = tagModelAssembler;
     }
 
     @Override
-    public ItemModel toModel(Item entity) {
-        ItemModel itemModel = super.getEntityWithId(entity);
+    public ItemDto toModel(Item entity) {
+        ItemDto itemDto = super.getEntityWithId(entity);
 
-        itemModel.setDescription(entity.getDescription());
-        itemModel.setName(entity.getName());
-        itemModel.setOwnerId(entity.getOwner().getId());
+        itemDto
+                .setDescription(entity.getDescription())
+                .setName(entity.getName())
+                .setOwnerId(entity.getOwner().getId())
+                .setPrice(entity.getPrice())
+                .setAvatar(Objects.isNull(entity.getAvatar())? "avatar.jpg" : entity.getAvatar());
 
-        Set<TagModel> setOfTagName = entity.getTags()
-                .stream()
-                .map(x -> tagModelAssembler.toModel(x))
-                .collect(Collectors.toSet());
-        itemModel.setTags(setOfTagName);
+        if (Objects.nonNull(entity.getTags())) {
+            Set<TagDto> setOfTagName = entity.getTags()
+                    .stream()
+                    .map(x -> tagModelAssembler.toModel(x))
+                    .collect(Collectors.toSet());
+            itemDto.setTags(setOfTagName);
+        }
 
-        itemModel.add(linkTo(methodOn(ItemController.class).getItemById(entity.getId())).withSelfRel());
-        return itemModel;
+        itemDto.add(linkTo(methodOn(ItemController.class).getItemById(entity.getId())).withSelfRel());
+        return itemDto;
     }
 
 

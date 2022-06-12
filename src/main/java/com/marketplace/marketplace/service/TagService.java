@@ -2,7 +2,7 @@ package com.marketplace.marketplace.service;
 
 import com.marketplace.marketplace.entity.Tag;
 import com.marketplace.marketplace.exception.entity.TagNotFoundException;
-import com.marketplace.marketplace.model.TagModel;
+import com.marketplace.marketplace.dto.TagDto;
 import com.marketplace.marketplace.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -58,8 +58,8 @@ public class TagService extends  AbstractService<Tag, Long>{
         return tagSet;
     }
 
-    public Set<Tag> getPersistTagsByTagModelsSet(Set<TagModel> tagModelSet) {
-        Set<Tag> tagSet = tagModelSet
+    public Set<Tag> getPersistTagsByTagModelsSet(Set<TagDto> tagDtoSet) {
+        Set<Tag> tagSet = tagDtoSet
                 .stream().map( tag -> buildPersistTagEntityByName(tag.getName()))
                 .collect(Collectors.toSet());
         return tagSet;

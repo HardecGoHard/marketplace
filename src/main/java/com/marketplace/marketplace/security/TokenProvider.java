@@ -3,8 +3,8 @@ package com.marketplace.marketplace.security;
 
 import com.marketplace.marketplace.entity.Role;
 import com.marketplace.marketplace.entity.User;
-import com.marketplace.marketplace.model.RefreshTokenModel;
-import com.marketplace.marketplace.model.TokenPairModel;
+import com.marketplace.marketplace.dto.RefreshTokenDto;
+import com.marketplace.marketplace.dto.TokenPairModel;
 import com.marketplace.marketplace.service.UserService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -40,8 +40,8 @@ public class TokenProvider {
                 .parseClaimsJws(refreshToken)
                 .getBody();
         User user = userService.getByUsername(claims.getSubject());
-        if (claims.get("token-type").equals("refresh") &&
-                claims.get("refresh-id").equals(user.getRefreshCode())) {
+        if (claims.get("tokenType").equals("refresh") &&
+                claims.get("refreshId").equals(user.getRefreshCode())) {
 
             return generateTokensFromUser(user);
             //} else {
@@ -58,8 +58,8 @@ public class TokenProvider {
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
-                .claim("user-id", user.getId())
-                .claim("token-type", "access")
+                .claim("userId", user.getId())
+                .claim("tokenType", "access")
                 .claim("role", user.getRole().name())
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
@@ -74,9 +74,9 @@ public class TokenProvider {
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
-                .claim("user-id", user.getId())
-                .claim("token-type", "refresh")
-                .claim("refresh-id", user.getRefreshCode())
+                .claim("userId", user.getId())
+                .claim("tokenType", "refresh")
+                .claim("refreshId", user.getRefreshCode())
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
@@ -113,18 +113,18 @@ public class TokenProvider {
                 .getBody();
         return new UserPrincipal()
                 .setUsername(claims.getSubject())
-                .setId(claims.get("user-id", Long.class))
+                .setId(claims.get("userId", Long.class))
                 .setRole(Role.valueOf((String) claims.get("role")));
     }
 
-    public RefreshTokenModel parseRefreshToken(String refreshToken) {
+    public RefreshTokenDto parseRefreshToken(String refreshToken) {
         Claims claims = Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(refreshToken)
                 .getBody();
-        return new RefreshTokenModel()
-                .setId(claims.get("user-id", Long.class))
+        return new RefreshTokenDto()
+                .setId(claims.get("userId", Long.class))
                 .setUsername(claims.getSubject())
-                .setRefreshCode(claims.get("refresh-id", String.class));
+                .setRefreshCode(claims.get("refreshId", String.class));
     }
 }
