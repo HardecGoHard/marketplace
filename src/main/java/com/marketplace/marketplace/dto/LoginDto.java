@@ -1,20 +1,20 @@
-package com.marketplace.marketplace.model;
+package com.marketplace.marketplace.dto;
 
 
-public class LoginModel {
+public class LoginDto {
 
     private String username;
 
     private String password;
 
-    public LoginModel() {
+    public LoginDto() {
     }
 
     public String getUsername() {
         return username;
     }
 
-    public LoginModel setUsername(String username) {
+    public LoginDto setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -23,7 +23,7 @@ public class LoginModel {
         return password;
     }
 
-    public LoginModel setPassword(String password) {
+    public LoginDto setPassword(String password) {
         this.password = password;
         return this;
     }
